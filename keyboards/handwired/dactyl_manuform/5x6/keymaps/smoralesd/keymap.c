@@ -12,17 +12,17 @@ enum layers {
 
 #define XXXXXXX KC_NO
 
-#define GUI_A LGUI_T(KC_A)
-#define ALT_S LALT_T(KC_S)
-#define CLT_D LCTL_T(KC_D)
-#define SFT_F LSFT_T(KC_F)
-#define ALT_X RALT_T(KC_X)
+#define HOME_A LGUI_T(KC_A)
+#define HOME_S LALT_T(KC_S)
+#define HOME_D LCTL_T(KC_D)
+#define HOME_F LSFT_T(KC_F)
+#define HOME_X RALT_T(KC_X)
 
-#define SFT_J LSFT_T(KC_J)
-#define CLT_K LCTL_T(KC_K)
-#define ALT_L LALT_T(KC_L)
-#define GUI_QUO LGUI_T(KC_QUOT)
-#define ALT_DOT RALT_T(KC_DOT)
+#define HOME_J LSFT_T(KC_J)
+#define HOME_K LCTL_T(KC_K)
+#define HOME_L LALT_T(KC_L)
+#define HOME_Q LGUI_T(KC_QUOT)
+#define HOME_DT RALT_T(KC_DOT)
 
 #define NAVR LT(_NAVR, KC_SPC)
 #define MOUS LT(_MOUS, KC_TAB)
@@ -36,8 +36,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_5x6(
         XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         XXXXXXX,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,                       KC_Y   ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,XXXXXXX,
-        XXXXXXX,GUI_A  ,ALT_S  ,CLT_D  ,SFT_F  ,KC_G   ,                       KC_H   ,SFT_J  ,CLT_K  ,ALT_L  ,GUI_QUO,XXXXXXX,
-        XXXXXXX,KC_Z   ,ALT_X  ,KC_C   ,KC_V   ,KC_B   ,                       KC_N   ,KC_M   ,KC_COMM,ALT_DOT,KC_SLSH,XXXXXXX,
+        XXXXXXX,HOME_A ,HOME_S ,HOME_D ,HOME_F ,KC_G   ,                       KC_H   ,HOME_J ,HOME_K ,HOME_L ,HOME_Q,XXXXXXX,
+        XXXXXXX,KC_Z   ,HOME_X ,KC_C   ,KC_V   ,KC_B   ,                       KC_N   ,KC_M   ,KC_COMM,HOME_DT,KC_SLSH,XXXXXXX,
                         XXXXXXX,XXXXXXX,                                                       XXXXXXX,XXXXXXX,
                                                 MEDR   ,NAVR   ,           NSL,FUNL   ,
                                                 XXXXXXX,MOUS   ,          NSSL,XXXXXXX,
