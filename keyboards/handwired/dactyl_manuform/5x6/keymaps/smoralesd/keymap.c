@@ -35,11 +35,38 @@ enum layers {
 #define COPY LCTL(KC_C)
 #define PASTE LCTL(KC_V)
 
+enum custom_macros {
+    LAMBDA = SAFE_RANGE,
+    ARROW,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode)
+    {
+    case LAMBDA:
+        if (!record->event.pressed) {
+            SEND_STRING("() => {}");
+        }
+        break;
+
+    case ARROW:
+        if (!record->event.pressed) {
+            SEND_STRING("=>");
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    return true;
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT_5x6(
-        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-        XXXXXXX,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,                       KC_Y   ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,XXXXXXX,
+        LAMBDA ,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        ARROW  ,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,                       KC_Y   ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,XXXXXXX,
         XXXXXXX,HOME_A ,HOME_S ,HOME_D ,HOME_F ,KC_G   ,                       KC_H   ,HOME_J ,HOME_K ,HOME_L ,HOME_Q,XXXXXXX,
         XXXXXXX,KC_Z   ,HOME_X ,KC_C   ,KC_V   ,KC_B   ,                       KC_N   ,KC_M   ,KC_COMM,HOME_DT,KC_SLSH,XXXXXXX,
                         XXXXXXX,XXXXXXX,                                                       XXXXXXX,XXXXXXX,
