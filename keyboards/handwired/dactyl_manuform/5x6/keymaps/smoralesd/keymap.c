@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 
 enum layers {
+    WRKMN,
     _BASE,
     _NAVR,
     _MOUS,
@@ -8,12 +9,12 @@ enum layers {
     __NSL,
     _NSSL,
     _FUNL,
-    QWERT,
-    WRKMN
+    QWERT
 };
 
 #define XXXXXXX KC_NO
 
+// home row key definitions for QWERTY layout
 #define HOME_A LGUI_T(KC_A)
 #define HOME_S LALT_T(KC_S)
 #define HOME_D LCTL_T(KC_D)
@@ -26,6 +27,19 @@ enum layers {
 #define HOME_Q LGUI_T(KC_QUOT)
 #define HOME_DT RALT_T(KC_DOT)
 
+// home row key definitions for WORKMAN layout
+#define WHOME_A LGUI_T(KC_A)
+#define WHOME_S LALT_T(KC_S)
+#define WHOME_H LCTL_T(KC_H)
+#define WHOME_T LSFT_T(KC_T)
+#define WHOME_X RALT_T(KC_X)
+
+#define WHOME_N LSFT_T(KC_N)
+#define WHOME_E LCTL_T(KC_E)
+#define WHOME_O LALT_T(KC_O)
+#define WHOME_I LGUI_T(KC_I)
+
+// layer management
 #define NAVR LT(_NAVR, KC_SPC)
 #define MOUS LT(_MOUS, KC_TAB)
 #define MEDR LT(_MEDR, KC_ESC)
@@ -37,6 +51,7 @@ enum layers {
 #define BASE TO(_BASE)
 #define WORKMAN TO(WRKMN)
 
+// shortcuts
 #define CUT LCTL(KC_X)
 #define COPY LCTL(KC_C)
 #define PASTE LCTL(KC_V)
@@ -68,7 +83,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+    [WRKMN] = LAYOUT_5x6(
+        LAMBDA ,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        ARROW  ,KC_Q   ,KC_D   ,KC_R   ,KC_W   ,KC_B   ,                       KC_J   ,KC_F   ,KC_U   ,KC_P   ,KC_QUOT,XXXXXXX,
+        XXXXXXX,WHOME_A,WHOME_S,WHOME_H,WHOME_T,KC_G   ,                       KC_Y   ,WHOME_N,WHOME_E,WHOME_O,WHOME_I,XXXXXXX,
+        XXXXXXX,KC_Z   ,WHOME_X,KC_M   ,KC_C   ,KC_V   ,                       KC_K   ,KC_L   ,KC_COMM,HOME_DT,KC_SLSH,XXXXXXX,
+                        XXXXXXX,XXXXXXX,                                                       XXXXXXX,XXXXXXX,
+                                                MEDR   ,NAVR   ,           NSL,FUNL   ,
+                                                XXXXXXX,MOUS   ,          NSSL,XXXXXXX,
+                                                BASE   ,XXXXXXX,       XXXXXXX,QWERTY
+    ),
 
     [_BASE] = LAYOUT_5x6(
         LAMBDA ,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
@@ -80,6 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                 XXXXXXX,MOUS   ,          NSSL,XXXXXXX,
                                                 WORKMAN,XXXXXXX,       XXXXXXX,QWERTY
     ),
+
 
     [_NAVR] = LAYOUT_5x6(
         XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
@@ -155,17 +183,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_LBRC,KC_RBRC,                                                    XXXXXXX,KC_EQL ,
                                                 XXXXXXX,KC_SPC ,    XXXXXXX,KC_DEL ,
                                                 XXXXXXX,XXXXXXX,     KC_ENT,XXXXXXX,
-                                                XXXXXXX,XXXXXXX,    XXXXXXX,BASE
-    ),
-
-    [WRKMN] = LAYOUT_5x6(
-        KC_ESC ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,                    KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSPC,
-        KC_TAB ,KC_Q   ,KC_D   ,KC_R   ,KC_W   ,KC_B   ,                    KC_J   ,KC_F   ,KC_U   ,KC_P   ,KC_SCLN,KC_MINS,
-        KC_LSFT,KC_A   ,KC_S   ,KC_H   ,KC_T   ,KC_G   ,                    KC_Y   ,KC_N   ,KC_E   ,KC_O   ,KC_I   ,KC_QUOT,
-        KC_LCTL,KC_Z   ,KC_X   ,KC_M   ,KC_C   ,KC_V   ,                    KC_K   ,KC_L   ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLS,
-                        KC_LBRC,KC_RBRC,                                                    XXXXXXX,KC_EQL ,
-                                                XXXXXXX,KC_SPC ,    XXXXXXX,KC_DEL ,
-                                                XXXXXXX,XXXXXXX,     KC_ENT,XXXXXXX,
-                                                   BASE,XXXXXXX,    XXXXXXX,XXXXXXX
-    )
+                                                WORKMAN,XXXXXXX,    XXXXXXX,BASE
+   )
 };
