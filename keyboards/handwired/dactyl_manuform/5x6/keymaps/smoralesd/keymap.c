@@ -7,8 +7,7 @@ enum layers {
     _MEDR,
     __NSL,
     _NSSL,
-    _FUNL,
-    QWERT
+    _FUNL
 };
 
 #define XXXXXXX KC_NO
@@ -33,9 +32,6 @@ enum layers {
 #define NSL LT(__NSL, KC_BSPC)
 #define NSSL LT(_NSSL, KC_ENT)
 #define FUNL LT(_FUNL, KC_DEL)
-
-#define QWERTY TO(QWERT)
-#define WORKMAN TO(WRKMN)
 
 // shortcuts
 #define CUT LCTL(KC_X)
@@ -80,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         XXXXXXX,XXXXXXX,                                                       XXXXXXX,XXXXXXX,
                                                 MEDR   ,NAVR   ,           NSL,FUNL   ,
                                                 XXXXXXX,MOUS   ,          NSSL,XXXXXXX,
-                                                QWERTY ,XXXXXXX,       XXXXXXX,XXXXXXX
+                                                XXXXXXX,XXXXXXX,       XXXXXXX,XXXXXXX
     ),
 
     [_NAVR] = LAYOUT_5x6(
@@ -147,16 +143,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                  KC_APP,KC_SPC,     XXXXXXX,XXXXXXX,
                                                 XXXXXXX,KC_TAB,     XXXXXXX,XXXXXXX,
                                                 XXXXXXX,XXXXXXX,    XXXXXXX,XXXXXXX
-    ),
-
-    [QWERT] = LAYOUT_5x6(
-        KC_ESC ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,                    KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSPC,
-        KC_TAB ,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,                    KC_Y   ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,KC_MINS,
-        KC_LSFT,KC_A   ,KC_S   ,KC_D   ,KC_F   ,KC_G   ,                    KC_H   ,KC_J   ,KC_K   ,KC_L   ,KC_SCLN,KC_QUOT,
-        KC_LCTL,KC_Z   ,KC_X   ,KC_C   ,KC_V   ,KC_B   ,                    KC_N   ,KC_M   ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLS,
-                        KC_LBRC,KC_RBRC,                                                    XXXXXXX,KC_EQL ,
-                                                XXXXXXX,KC_SPC ,    XXXXXXX,KC_DEL ,
-                                                XXXXXXX,XXXXXXX,     KC_ENT,XXXXXXX,
-                                                WORKMAN,XXXXXXX,    XXXXXXX,XXXXXXX
-   )
+    )
 };
