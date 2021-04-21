@@ -7,7 +7,8 @@ enum layers {
     _MEDR,
     __NSL,
     _NSSL,
-    _FUNL
+    _FUNL,
+    _MACR
 };
 
 // home row key definitions for WORKMAN layout
@@ -30,6 +31,7 @@ enum layers {
 #define NSL LT(__NSL, KC_BSPC)
 #define NSSL LT(_NSSL, KC_ENT)
 #define FUNL LT(_FUNL, KC_DEL)
+#define MACR LT(_MACR, KC_G)
 
 // shortcuts
 #define CUT LCTL(KC_X)
@@ -67,9 +69,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WRKMN] = LAYOUT_5x6(
-        LAMBDA ,_______,_______,_______,_______,_______,                       _______,_______,_______,_______,_______,_______,
-        ARROW  ,KC_Q   ,KC_D   ,KC_R   ,KC_W   ,KC_B   ,                       KC_J   ,KC_F   ,KC_U   ,KC_P   ,KC_QUOT,_______,
-        _______,HOME_A ,HOME_S ,HOME_H ,HOME_T ,KC_G   ,                       KC_Y   ,HOME_N ,HOME_E ,HOME_O ,HOME_I ,_______,
+        _______,_______,_______,_______,_______,_______,                       _______,_______,_______,_______,_______,_______,
+        _______,KC_Q   ,KC_D   ,KC_R   ,KC_W   ,KC_B   ,                       KC_J   ,KC_F   ,KC_U   ,KC_P   ,KC_QUOT,_______,
+        _______,HOME_A ,HOME_S ,HOME_H ,HOME_T ,MACR   ,                       KC_Y   ,HOME_N ,HOME_E ,HOME_O ,HOME_I ,_______,
         _______,KC_Z   ,HOME_X ,KC_M   ,KC_C   ,KC_V   ,                       KC_K   ,KC_L   ,KC_COMM,HOME_DT,KC_SLSH,_______,
                         _______,_______,                                                       _______,_______,
                                                 MEDR   ,NAVR   ,           NSL,FUNL   ,
@@ -84,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,_______,KC_RALT,_______,_______,_______,                       KC_HOME,KC_PGDN,KC_PGUP,KC_END ,KC_INS ,_______,
                         _______,_______,                                                       _______,_______,
                                                 _______,_______,       KC_BSPC,KC_DEL ,
-                                                _______,_______,        KC_ENT,_______,
+                                                _______,_______,       KC_ENT ,_______,
                                                 _______,_______,       _______,_______
     ),
 
@@ -138,8 +140,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,KC_F11 ,KC_F4  ,KC_F5  ,KC_F6  ,KC_SLCK,                    _______,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,_______,
         _______,KC_F10 ,KC_F1  ,KC_F2  ,KC_F3  ,KC_PAUS,                    _______,_______,_______,KC_RALT,_______,_______,
                         _______,_______,                                                    _______,_______,
-                                                 KC_APP,KC_SPC,     _______,_______,
-                                                _______,KC_TAB,     _______,_______,
+                                                 KC_APP,KC_SPC ,    _______,_______,
+                                                _______,KC_TAB ,    _______,_______,
+                                                _______,_______,    _______,_______
+    ),
+
+    [_MACR] = LAYOUT_5x6(
+        _______,_______,_______,_______,_______,_______,                    _______,_______,_______,_______,_______,_______,
+        _______,_______,_______,_______,_______,_______,                    _______,_______,_______,_______,_______,_______,
+        _______,_______,_______,_______,_______,_______,                    _______,ARROW  ,LAMBDA ,_______,_______,_______,
+        _______,_______,_______,_______,_______,_______,                    _______,_______,_______,_______,_______,_______,
+                        _______,_______,                                                    _______,_______,
+                                                _______,_______,    _______,_______,
+                                                _______,_______,    _______,_______,
                                                 _______,_______,    _______,_______
     )
 };
