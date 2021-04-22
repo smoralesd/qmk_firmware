@@ -7,7 +7,8 @@ enum layers {
     _MEDR,
     __NSL,
     _NSSL,
-    _FUNL
+    _FUNL,
+    _MACR
 };
 
 #define XXXXXXX KC_NO
@@ -32,17 +33,45 @@ enum layers {
 #define NSL LT(__NSL, KC_BSPC)
 #define NSSL LT(_NSSL, KC_ENT)
 #define FUNL LT(_FUNL, KC_DEL)
+#define MACR LT(_MACR, KC_G)
 
 // shortcuts
 #define CUT LCTL(KC_X)
 #define COPY LCTL(KC_C)
 #define PASTE LCTL(KC_V)
 
+enum custom_macros {
+    LAMBDA = SAFE_RANGE,
+    ARROW,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode)
+    {
+    case LAMBDA:
+        if (!record->event.pressed) {
+            SEND_STRING("() => {}");
+        }
+        break;
+
+    case ARROW:
+        if (!record->event.pressed) {
+            SEND_STRING("=>");
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    return true;
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WRKMN] = LAYOUT_3x5_3(
         KC_Q   ,KC_D   ,KC_R   ,KC_W   ,KC_B   ,                       KC_J   ,KC_F   ,KC_U   ,KC_P   ,KC_QUOT,
-        HOME_A ,HOME_S ,HOME_H ,HOME_T ,KC_G   ,                       KC_Y   ,HOME_N ,HOME_E ,HOME_O ,HOME_I ,
+        HOME_A ,HOME_S ,HOME_H ,HOME_T ,MACR   ,                       KC_Y   ,HOME_N ,HOME_E ,HOME_O ,HOME_I ,
         KC_Z   ,HOME_X ,KC_M   ,KC_C   ,KC_V   ,                       KC_K   ,KC_L   ,KC_COMM,HOME_DT,KC_SLSH,
                         MEDR   ,NAVR   ,MOUS   ,                       NSSL   ,NSL    ,FUNL
     ),
@@ -87,5 +116,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F11 ,KC_F4  ,KC_F5  ,KC_F6  ,KC_SLCK,                    XXXXXXX,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,
         KC_F10 ,KC_F1  ,KC_F2  ,KC_F3  ,KC_PAUS,                    XXXXXXX,XXXXXXX,XXXXXXX,KC_RALT,XXXXXXX,
                         KC_APP ,KC_SPC ,KC_TAB ,                    XXXXXXX,XXXXXXX,XXXXXXX
+    ),
+
+    [_MACR] = LAYOUT_3x5_3(
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,ARROW  ,LAMBDA ,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                        XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,XXXXXXX,XXXXXXX
     )
 };
