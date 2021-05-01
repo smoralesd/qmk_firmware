@@ -19,6 +19,7 @@ enum layers {
 #define HOME_H LCTL_T(KC_H)
 #define HOME_T LSFT_T(KC_T)
 #define HOME_X RALT_T(KC_X)
+#define HOME_G LT(_MACR, KC_G)
 
 #define HOME_N LSFT_T(KC_N)
 #define HOME_E LCTL_T(KC_E)
@@ -33,7 +34,6 @@ enum layers {
 #define NSL LT(__NSL, KC_BSPC)
 #define NSSL LT(_NSSL, KC_ENT)
 #define FUNL LT(_FUNL, KC_DEL)
-#define MACR LT(_MACR, KC_G)
 
 // shortcuts
 #define CUT LCTL(KC_X)
@@ -43,6 +43,7 @@ enum layers {
 enum custom_macros {
     LAMBDA = SAFE_RANGE,
     ARROW,
+    FUNC
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -60,6 +61,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
 
+    case FUNC:
+        if (!record->event.pressed) {
+            SEND_STRING("() {}");
+        }
+        break;
+
     default:
         break;
     }
@@ -73,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [WRKMN] = LAYOUT_5x6(
         XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                       XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         XXXXXXX,KC_Q   ,KC_D   ,KC_R   ,KC_W   ,KC_B   ,                       KC_J   ,KC_F   ,KC_U   ,KC_P   ,KC_QUOT,XXXXXXX,
-        XXXXXXX,HOME_A ,HOME_S ,HOME_H ,HOME_T ,MACR   ,                       KC_Y   ,HOME_N ,HOME_E ,HOME_O ,HOME_I ,XXXXXXX,
+        XXXXXXX,HOME_A ,HOME_S ,HOME_H ,HOME_T ,HOME_G ,                       KC_Y   ,HOME_N ,HOME_E ,HOME_O ,HOME_I ,XXXXXXX,
         XXXXXXX,KC_Z   ,HOME_X ,KC_M   ,KC_C   ,KC_V   ,                       KC_K   ,KC_L   ,KC_COMM,HOME_DT,KC_SLSH,XXXXXXX,
                         XXXXXXX,XXXXXXX,                                                       XXXXXXX,XXXXXXX,
                                                 MEDR   ,NAVR   ,           NSL,FUNL   ,
@@ -150,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MACR] = LAYOUT_5x6(
         XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,ARROW  ,LAMBDA ,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,ARROW  ,LAMBDA ,FUNC   ,XXXXXXX,XXXXXXX,
         XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
                         XXXXXXX,XXXXXXX,                                                    XXXXXXX,XXXXXXX,
                                                 XXXXXXX,XXXXXXX,    XXXXXXX,XXXXXXX,
